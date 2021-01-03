@@ -13,4 +13,10 @@
       <li>https://chandraprabhu02.github.io/miniProjects/FlyingBallsAndStatue</li>
     </ul>
   </li>
+  <li>
+    Snake Game
+    <ul>
+      <li>https://chandraprabhu02.github.io/miniProjects/SnakeGame</li>
+    </ul>
+  </li>
 </ol>
