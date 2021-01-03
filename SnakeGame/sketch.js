@@ -36,6 +36,7 @@ if (innerWidth > 500) {
         new Controls((i * width) / 4 + width / 8, height + scale, "v˄<>"[i], i)
       );
     }
+    text(innerWidth, 50, 50);
   }
   function mousePressed() {
     for (let i = 0; i < 4; i++) {
