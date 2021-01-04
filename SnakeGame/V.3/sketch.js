@@ -1,3 +1,6 @@
+alert(
+  "Welcome to the game !!! , Here the bot controls the snake,use (s,m,f) to change the speed of the snake,"
+);
 var isFill = [],
   snakeBody = [[0, 0]],
   controlButtons = [],
@@ -11,8 +14,7 @@ var headX = 0,
   foodX,
   foodY,
   score = 0,
-  movesCount = 0,
-  movesChoice = 0;
+  movesCount = 0;
 
 function setup() {
   createCanvas(
@@ -31,7 +33,7 @@ function setup() {
   stroke(255);
   line(0, height, width, height);
   noStroke();
-  frameRate(1);
+  frameRate(20);
   foodX = floor(random(0, width));
   foodY = floor(random(0, height));
   drawFood();
@@ -68,7 +70,7 @@ function keyPressed() {
     frameRate(30);
   } else if (key == " ") {
     CheatCodeForLengthExtention = !CheatCodeForLengthExtention;
-  } else if (key == "t") {
+  } else if (key == "t" && false) {
     noLoop();
     background(0);
     fill(100);
@@ -99,11 +101,12 @@ function draw() {
   }
   if (headX == foodX && headY == foodY) {
     drawFood();
-    if (movesChoice == 3) movesChoice = -1;
-    movesChoice++;
     score += snakeBody.length;
-    if (score > 200 || true) {
-      // frameRate(35);
+    /*if (score > 500) {
+      frameRate(60);
+    }
+    if (score > 200) {
+      frameRate(35);
     } else if (score > 100) {
       frameRate(20);
     } else if (score > 30) {
@@ -112,7 +115,7 @@ function draw() {
       frameRate(10);
     } else {
       frameRate(8);
-    }
+    }*/
   } else {
     removeTail();
   }
@@ -127,7 +130,7 @@ function draw() {
 }
 
 function BOT() {
-  if (movesChoice == 3 || true) {
+  if (snakeBody.length > 10 || snakeBody.length % 2 == 0) {
     poorWay();
   } else if (headX != foodX) {
     if (headX > foodX) {
@@ -208,6 +211,13 @@ function poorWay() {
       }
     }
   } else if (
+    headY == isFill[0].length - 1 &&
+    headX + 1 < foodX &&
+    headX + 1 < snakeBody[0][0]
+  ) {
+    updateX = 0;
+    updateY = -1;
+  } else if (
     isFill[headX + 1][headY] == false &&
     checkCondition(/*headX + 3 + (snakeBody.length + 100) / height, foodX*/) &&
     headY != isFill[0].length - 1
@@ -231,7 +241,10 @@ function poorWay() {
       updateY = 0;
     }
   } else if (headY == isFill[0].length - 2) {
-    if ((headX & 1) == 1) {
+    if (isFill[headX][headY + 1] == false && headX > foodX) {
+      updateX = 0;
+      updateY = 1;
+    } else if ((headX & 1) == 1) {
       updateX = 1;
       updateY = 0;
     } else {
@@ -239,6 +252,8 @@ function poorWay() {
       updateY = -1;
     }
   } else if (headY == isFill[0].length - 1) {
+    updateX = -1;
+    updateY = 0;
   } else if ((headX & 1) == 1) {
     updateX = 0;
     updateY = 1;
@@ -284,8 +299,9 @@ function checkCondition(a, b) {
   //console.log(a, b);
   //return a < b || (headX > b && modx(a) > headX);
   if (foodX == headX || headX + 1 == foodX) return false;
-  if (snakeBody.length < isFill.length + isFill.length) return true;
+  //if (snakeBody.length < isFill.length + isFill.length) return true;
   if (snakeBody[0][1] == isFill[0].length - 1) return true;
+  if (foodX < headX && snakeBody[0][0] < headX) return false;
   return snakeBody[0][0] != headX + 1 && snakeBody[0][0] != headX;
 }
 

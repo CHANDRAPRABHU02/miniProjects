@@ -1,3 +1,7 @@
+alert(
+  "Welcome to the game !!! , use  arrows to control the snake,use (s,m,f) to change the speed of the snake,after catching the food the speed resets to current speed,each new  blocks appears for each 15 steps"
+);
+
 var isFill = [],
   snakeBody = [[0, 0]],
   controlButtons = [];
@@ -81,9 +85,7 @@ function draw() {
   if (headX == foodX && headY == foodY) {
     drawFood();
     score += snakeBody.length;
-    if (score > 200) {
-      frameRate(25);
-    } else if (score > 100) {
+    if (score > 100) {
       frameRate(20);
     } else if (score > 30) {
       frameRate(15);

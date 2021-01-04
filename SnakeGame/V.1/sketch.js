@@ -1,3 +1,8 @@
+alert(
+  "Welcome to the game !!! , use  arrows to control the snake,use (s,m,f) to change the speed of the snake,after catching the food the speed resets to current speed";
+);
+
+
 var isFill = [],
   snakeBody = [[0, 0]],
   controlButtons = [];
