@@ -64,13 +64,16 @@ function keyPressed() {
 function draw() {
   headX += updateX;
   headY += updateY;
-  if (
-    headX < 0 ||
-    headX >= width / scale ||
-    headY < 0 ||
-    headY >= height / scale ||
-    isFill[headX][headY]
-  ) {
+  if (headX < 0) {
+    headX = width / scale - 1;
+  } else if (headX >= width / scale) {
+    headX = 0;
+  } else if (headY < 0) {
+    headY = height / scale - 1;
+  } else if (headY >= height / scale) {
+    headY = 0;
+  }
+  if (isFill[headX][headY]) {
     endGame();
     return;
   }

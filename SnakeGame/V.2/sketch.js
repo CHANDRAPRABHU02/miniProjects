@@ -67,14 +67,11 @@ function draw() {
   headY += updateY;
   if (headX < 0) {
     headX = width / scale - 1;
-  }
-  if (headX >= width / scale) {
+  } else if (headX >= width / scale) {
     headX = 0;
-  }
-  if (headY < 0) {
+  } else if (headY < 0) {
     headY = height / scale - 1;
-  }
-  if (headY >= height / scale) {
+  } else if (headY >= height / scale) {
     headY = 0;
   }
   if (isFill[headX][headY]) {
@@ -102,7 +99,7 @@ function draw() {
   drawPart(headX, headY);
   snakeBody.push([headX, headY]);
   isFill[headX][headY] = true;
-  if (movesCount == 10) {
+  if (movesCount == 15) {
     createBlocks();
     movesCount = 0;
   } else movesCount++;
