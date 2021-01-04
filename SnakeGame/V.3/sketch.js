@@ -1,6 +1,8 @@
 var isFill = [],
   snakeBody = [[0, 0]],
-  controlButtons = [];
+  controlButtons = [],
+  CheatCodeForLengthExtention = false,
+  dir = [-1, 0, 1];
 const scale = 20;
 var headX = 0,
   headY = 0,
@@ -9,7 +11,8 @@ var headX = 0,
   foodX,
   foodY,
   score = 0,
-  movesCount = 0;
+  movesCount = 0,
+  movesChoice = 0;
 
 function setup() {
   createCanvas(
@@ -28,7 +31,7 @@ function setup() {
   stroke(255);
   line(0, height, width, height);
   noStroke();
-  frameRate(20);
+  frameRate(1);
   foodX = floor(random(0, width));
   foodY = floor(random(0, height));
   drawFood();
@@ -57,8 +60,23 @@ function keyPressed() {
   } else if (keyCode == RIGHT_ARROW) {
     updateX = 1;
     updateY = 0;
+  } else if (key == "f") {
+    frameRate(120);
   } else if (key == "s") {
+    frameRate(4);
+  } else if (key == "m") {
+    frameRate(30);
+  } else if (key == " ") {
+    CheatCodeForLengthExtention = !CheatCodeForLengthExtention;
+  } else if (key == "t") {
     noLoop();
+    background(0);
+    fill(100);
+    for (let i = 0; i < isFill.length; i++) {
+      for (let j = 0; j < isFill[0].length; j++) {
+        if (isFill[i][j]) drawPart(i, j);
+      }
+    }
   }
 }
 
@@ -67,12 +85,12 @@ function draw() {
   headX += updateX;
   headY += updateY;
   if (headX < 0) {
-    headX = width / scale - 1;
-  } else if (headX >= width / scale) {
+    headX = isFill.length - 1;
+  } else if (headX >= isFill.length) {
     headX = 0;
   } else if (headY < 0) {
-    headY = height / scale - 1;
-  } else if (headY >= height / scale) {
+    headY = isFill[0].length - 1;
+  } else if (headY >= isFill[0].length) {
     headY = 0;
   }
   if (isFill[headX][headY]) {
@@ -81,9 +99,11 @@ function draw() {
   }
   if (headX == foodX && headY == foodY) {
     drawFood();
+    if (movesChoice == 3) movesChoice = -1;
+    movesChoice++;
     score += snakeBody.length;
     if (score > 200 || true) {
-      frameRate(25);
+      // frameRate(35);
     } else if (score > 100) {
       frameRate(20);
     } else if (score > 30) {
@@ -107,7 +127,9 @@ function draw() {
 }
 
 function BOT() {
-  if (headX != foodX) {
+  if (movesChoice == 3 || true) {
+    poorWay();
+  } else if (headX != foodX) {
     if (headX > foodX) {
       updateX = -1;
       updateY = 0;
@@ -115,7 +137,7 @@ function BOT() {
       updateX = 1;
       updateY = 0;
     }
-  } else if (headY != headX) {
+  } else if (headY != foodY) {
     if (headY > foodY) {
       updateX = 0;
       updateY = -1;
@@ -125,17 +147,104 @@ function BOT() {
     }
   }
   let counter = 0;
-  if (isFill[headX + updateX][headY + updateY]) {
-    updateX = 0;
-    updateY = 0;
+  if (isFill[modx(headX + updateX)][mody(headY + updateY)]) {
+    // console.log("B:", updateX, updateY);
+    // if (updateX) updateX = -updateX;
+    // else updateY = -updateY;
+    // console.log("A:", updateX, updateY);
+    // if (isFill[modx(headX + updateX)][mody(headY + updateY)]) {
+    //   if (updateX) {
+    //     updateX = 0;
+    //     updateY = -1;
+    //   } else {
+    //     updateX = -1;
+    //     updateY = 0;
+    //   }
+    // }
+    //console.log("WARNING");
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (abs(dir[i] + dir[j]) != 1) continue;
+        if (isFill[modx(headX + dir[i])][mody(headY + dir[j])] == false) {
+          updateX = dir[i];
+          updateY = dir[j];
+          log(i, j);
+          i = 3;
+          break;
+        }
+      }
+    }
+    //console.log("UP", headX, headY, updateX, updateY);
   }
-  while (isFill[headX + updateX][headY + updateY] && counter < 10) {
-    updateY++;
-    if (updateY == 2) {
-      updateX++;
+  if (false)
+    while (isFill[headX + updateX][headY + updateY] && counter < 10) {
+      updateY++;
+      if (updateY == 2) {
+        updateX++;
+        updateY = -1;
+      }
+      counter++;
+    }
+}
+
+function poorWay() {
+  if (headX == isFill.length - 1) {
+    if (isFill.length & 1) {
+      if (headY == 0) {
+      } else if (headY == isFill[0].length - 1) {
+        updateX = -1;
+        updateY = 0;
+      } else {
+        updateX = 0;
+        updateY = -1;
+      }
+    } else {
+      if (headY == isFill[0].length - 1) {
+        updateX = -1;
+        updateY = 0;
+      } else {
+        updateX = 0;
+        updateY = 1;
+      }
+    }
+  } else if (
+    isFill[headX + 1][headY] == false &&
+    checkCondition(/*headX + 3 + (snakeBody.length + 100) / height, foodX*/) &&
+    headY != isFill[0].length - 1
+  ) {
+    updateX = 1;
+    updateY = 0;
+  } else if (headX == 0) {
+    if (headY == 0) {
+      updateX = 1;
+      updateY = 0;
+    } else {
+      updateX = 0;
       updateY = -1;
     }
-    counter++;
+  } else if (headY == 0) {
+    if ((headX & 1) == 1) {
+      updateX = 0;
+      updateY = 1;
+    } else {
+      updateX = 1;
+      updateY = 0;
+    }
+  } else if (headY == isFill[0].length - 2) {
+    if ((headX & 1) == 1) {
+      updateX = 1;
+      updateY = 0;
+    } else {
+      updateX = 0;
+      updateY = -1;
+    }
+  } else if (headY == isFill[0].length - 1) {
+  } else if ((headX & 1) == 1) {
+    updateX = 0;
+    updateY = 1;
+  } else {
+    updateX = 0;
+    updateY = -1;
   }
 }
 
@@ -156,6 +265,9 @@ function drawFood() {
 }
 
 function removeTail() {
+  if (CheatCodeForLengthExtention) {
+    return;
+  }
   const tailToBeDeleted = snakeBody.shift();
   removePart(tailToBeDeleted[0], tailToBeDeleted[1]);
   isFill[tailToBeDeleted[0]][tailToBeDeleted[1]] = false;
@@ -166,6 +278,15 @@ class Snake {
     this.x = newX;
     this.y = newY;
   }
+}
+function checkCondition(a, b) {
+  // if (a < headX && a > foodX) return false;
+  //console.log(a, b);
+  //return a < b || (headX > b && modx(a) > headX);
+  if (foodX == headX || headX + 1 == foodX) return false;
+  if (snakeBody.length < isFill.length + isFill.length) return true;
+  if (snakeBody[0][1] == isFill[0].length - 1) return true;
+  return snakeBody[0][0] != headX + 1 && snakeBody[0][0] != headX;
 }
 
 function createBlocks() {
@@ -217,9 +338,22 @@ class Controls {
 }
 
 function endGame() {
+  noLoop();
+  return;
   background(255, 0, 0);
   textSize(32);
   text("You Lost !!!", width / 3, height / 3);
   text("Your Score is " + score, width / 3, height / 3 + 40);
   noLoop();
+}
+
+function modx(x) {
+  if (x < 0) x += isFill.length;
+  if (x < isFill.length) return x;
+  return x - isFill.length;
+}
+function mody(x) {
+  if (x < 0) x += isFill[0].length;
+  if (x < isFill[0].length) return x;
+  return x - isFill[0].length;
 }
