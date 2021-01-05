@@ -33,7 +33,7 @@ function setup() {
   stroke(255);
   line(0, height, width, height);
   noStroke();
-  frameRate(20);
+  frameRate(80);
   foodX = floor(random(0, width));
   foodY = floor(random(0, height));
   drawFood();

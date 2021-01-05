@@ -1,5 +1,5 @@
 alert(
-  "Welcome to the game !!! , use  arrows to control the snake,use (s,m,f) to change the speed of the snake,after catching the food the speed resets to current speed,each new  blocks appears for each 15 steps"
+  "Welcome to the game !!! , use  arrows to control the snake,use 's' to reduce the speed of the snake,after catching the food the speed resets to current speed,new  blocks appears for each 15 steps"
 );
 
 var isFill = [],
@@ -62,7 +62,7 @@ function keyPressed() {
     updateX = 1;
     updateY = 0;
   } else if (key == "s") {
-    noLoop();
+    frameRate(8);
   }
 }
 
