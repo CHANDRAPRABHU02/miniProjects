@@ -16,10 +16,10 @@
   <li>
     Snake Game
     <p>
-      In version 1 of the Snake game is the easy version where you will not have any blocks.
+      In version 1 of the Snake game is the easy version.
     </p>
     <p>
-      In version 2 of the Snake game is the mediium version where you will have the blocks.
+      In version 2 of the Snake game is the medium version where you will have the blocks.
     </p>
     <p>
       In version 3 of the Snake game I have Automated snake game
