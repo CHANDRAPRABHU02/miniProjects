@@ -2,7 +2,7 @@
 
 <ol>
   <li>
-    I have made my first miniproject Bouncing ball with p5.js
+    I have made my first miniproject Bouncing ball with javascript
     <ul>
       <li>https://chandraprabhu02.github.io/miniProjects/BouncingBall</li>
     </ul>
