@@ -298,10 +298,13 @@ function checkCondition(a, b) {
   // if (a < headX && a > foodX) return false;
   //console.log(a, b);
   //return a < b || (headX > b && modx(a) > headX);
-  if (foodX == headX || headX + 1 == foodX) return false;
+  if (headX + 1 == foodX) {
+    return headY < foodY == (headX % 2 == 0);
+  }
+  if (foodX == headX) return false;
   //if (snakeBody.length < isFill.length + isFill.length) return true;
-  if (snakeBody[0][1] == isFill[0].length - 1) return true;
-  if (foodX < headX && snakeBody[0][0] < headX) return false;
+  // if (snakeBody[0][1] == isFill[0].length - 1) return true;
+  if (foodX < headX && snakeBody[0][0] < headX) return (headX & 1) == 0;
   return snakeBody[0][0] != headX + 1 && snakeBody[0][0] != headX;
 }
 
