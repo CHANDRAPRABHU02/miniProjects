@@ -22,7 +22,7 @@
       In version 2 of the Snake game is the medium version where you will have the blocks.
     </p>
     <p>
-      In version 3 of the Snake game I have Automated snake game
+      In version 3 of the Snake game I have Automated snake game.
     </p>
     <ul>
       <li>V.1 https://chandraprabhu02.github.io/miniProjects/SnakeGame/V.1</li>
