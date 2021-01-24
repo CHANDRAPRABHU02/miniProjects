@@ -14,7 +14,7 @@ function setup() {
   height = c * size;
   createCanvas(width, height);
   background(0);
-  noLoop();
+  // noLoop();
   for (let i = 0; i < r; i++) {
     var row = [];
     for (let j = 0; j < c; j++) {
@@ -22,7 +22,7 @@ function setup() {
     }
     array.push(row);
   }
-  frameRate(5);
+  frameRate(3);
 }
 
 function draw() {
