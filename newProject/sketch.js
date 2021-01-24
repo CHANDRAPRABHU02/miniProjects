@@ -22,7 +22,7 @@ function setup() {
     }
     array.push(row);
   }
-  frameRate(2);
+  frameRate(3);
 }
 
 function draw() {
