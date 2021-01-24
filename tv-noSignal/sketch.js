@@ -1,7 +1,8 @@
 var array = [];
 var r, c, size;
 var song;
-alert("This is a simple example of the TV that has no signal");
+
+alert("To enjoy the music please click on the screen");
 
 function preload() {
   song = loadSound("../Music/tv-nosignal.mp3");
