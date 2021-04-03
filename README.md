@@ -4,13 +4,13 @@
   <li>
     I have made my first miniproject Bouncing ball with javascript
     <ul>
-      <li>https://chandraprabhu02.github.io/miniProjects/BouncingBall</li>
+      <li>https://chandraprabhu02.github.io/miniProjects/1.BouncingBall</li>
     </ul>
   </li>
   <li>
     Flying Balls and statue 
     <ul>
-      <li>https://chandraprabhu02.github.io/miniProjects/FlyingBallsAndStatue</li>
+      <li>https://chandraprabhu02.github.io/miniProjects/2.FlyingBallsAndStatue</li>
     </ul>
   </li>
   <li>
@@ -25,9 +25,9 @@
       In version 3 of the Snake game I have Automated snake game.
     </p>
     <ul>
-      <li>V.1 https://chandraprabhu02.github.io/miniProjects/SnakeGame/V.1</li>
-      <li>V.2 https://chandraprabhu02.github.io/miniProjects/SnakeGame/V.2</li>
-      <li>V.3 https://chandraprabhu02.github.io/miniProjects/SnakeGame/V.3</li>
+      <li>V.1 https://chandraprabhu02.github.io/miniProjects/3.SnakeGame/V.1</li>
+      <li>V.2 https://chandraprabhu02.github.io/miniProjects/3.SnakeGame/V.2</li>
+      <li>V.3 https://chandraprabhu02.github.io/miniProjects/3.SnakeGame/V.3</li>
     </ul>
   </li>
 </ol>
